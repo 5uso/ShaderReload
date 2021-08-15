@@ -42,6 +42,7 @@ public class KeyMixin {
                                     new LiteralText("")
                             .append(new LiteralText("[Debug]:").formatted(Formatting.BOLD, Formatting.YELLOW))
                             .append(new LiteralText(" Unknown error while reloading shaders").formatted(Formatting.RED)));
+                            ex.printStackTrace();
                             return;
                         }
                     } while (!(ex instanceof ShaderParseException));
