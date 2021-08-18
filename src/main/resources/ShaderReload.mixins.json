@@ -6,7 +6,8 @@
   "mixins": [
   ],
   "client": [
-    "KeyMixin"
+    "KeyMixin",
+    "LinkerMixin"
   ],
   "injectors": {
     "defaultRequire": 1
