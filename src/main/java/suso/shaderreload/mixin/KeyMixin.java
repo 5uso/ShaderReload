@@ -12,7 +12,7 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 
 @Mixin(Keyboard.class)
 public class KeyMixin {
-    @Inject(at = @At("RETURN"), method = "processF3")
+    @Inject(at = @At("RETURN"), method = "processF3", cancellable = true)
     public void inputReload(int key, CallbackInfoReturnable<Boolean> cir) {
         switch (key) {
 
@@ -54,6 +54,7 @@ public class KeyMixin {
                     .append(new LiteralText(" Error while reloading shaders\n\n").formatted(Formatting.RED))
                     .append(new LiteralText(s.getMessage())));
                 }
+                cir.setReturnValue(true);
 
         }
     }
