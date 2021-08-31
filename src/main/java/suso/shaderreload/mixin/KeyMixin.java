@@ -26,6 +26,7 @@ public class KeyMixin {
                 MinecraftClient client = MinecraftClient.getInstance();
                 try {
                     client.gameRenderer.reload(client.getResourceManager());
+                    client.worldRenderer.reload(client.getResourceManager());
                     client.inGameHud.getChatHud().addMessage(
                             new LiteralText("")
                     .append(new LiteralText("[Debug]:").formatted(Formatting.BOLD, Formatting.YELLOW))
