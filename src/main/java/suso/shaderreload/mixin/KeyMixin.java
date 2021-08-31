@@ -9,6 +9,7 @@ import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
+import suso.shaderreload.client.ShaderReloadClient;
 
 @Mixin(Keyboard.class)
 public class KeyMixin {
@@ -23,6 +24,7 @@ public class KeyMixin {
                 return;
 
             case 'R':
+                ShaderReloadClient.reloading = true;
                 MinecraftClient client = MinecraftClient.getInstance();
                 try {
                     client.gameRenderer.reload(client.getResourceManager());
@@ -55,6 +57,7 @@ public class KeyMixin {
                     .append(new LiteralText(" Error while reloading shaders\n\n").formatted(Formatting.RED))
                     .append(new LiteralText(s.getMessage())));
                 }
+                ShaderReloadClient.reloading = false;
                 cir.setReturnValue(true);
 
         }
