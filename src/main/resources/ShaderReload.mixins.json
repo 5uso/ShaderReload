@@ -8,7 +8,8 @@
   "client": [
     "KeyMixin",
     "LinkerMixin",
-    "WorldRendererMixin"
+    "WorldRendererMixin",
+    "GameRendererMixin"
   ],
   "injectors": {
     "defaultRequire": 1

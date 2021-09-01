@@ -3,7 +3,6 @@ package suso.shaderreload.mixin;
 import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.gl.Framebuffer;
 import net.minecraft.client.gl.ShaderEffect;
-import net.minecraft.client.option.GraphicsMode;
 import net.minecraft.client.render.WorldRenderer;
 import net.minecraft.text.LiteralText;
 import net.minecraft.text.Text;
@@ -21,12 +20,8 @@ import java.io.IOException;
 
 @Mixin(WorldRenderer.class)
 public abstract class WorldRendererMixin {
-    @Shadow
-    private ShaderEffect entityOutlineShader;
-    @Shadow
-    private Framebuffer entityOutlinesFramebuffer;
-
-
+    @Shadow private ShaderEffect entityOutlineShader;
+    @Shadow private Framebuffer entityOutlinesFramebuffer;
     @Shadow protected abstract void resetTransparencyShader();
 
     @Inject(
