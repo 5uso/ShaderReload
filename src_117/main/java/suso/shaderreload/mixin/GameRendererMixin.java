@@ -23,7 +23,7 @@ public abstract class GameRendererMixin {
             method = "loadShader(Lnet/minecraft/util/Identifier;)V",
             at = @At(
                     value = "INVOKE",
-                    target = "Lorg/slf4j/Logger;warn(Ljava/lang/String;Ljava/lang/Object;Ljava/lang/Object;)V",
+                    target = "Lorg/apache/logging/log4j/Logger;warn(Ljava/lang/String;Ljava/lang/Object;Ljava/lang/Object;)V",
                     remap = false,
                     ordinal = 0
             ),
