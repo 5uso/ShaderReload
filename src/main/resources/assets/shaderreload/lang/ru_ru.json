@@ -1,0 +1,13 @@
+{
+  "debug.reload_shaders.help": "F3 + R = Перезагрузить шейдеры",
+  "debug.reload_shaders.message": "Шейдеры перезагружены",
+
+  "debug.reload_shaders.error": "В время загрузки шейдеров произошла ошибка:",
+  "debug.reload_shaders.error.builtin": "В время загрузки встроенных шейдеров произошла ошибка:",
+
+  "debug.reload_shaders.unknown_error": "В время загрузки шейдеров произошла неизвестная ошибка",
+  "debug.reload_shaders.unknown_error.builtin": "В время загрузки встроенных шейдеров произошла неизвестная ошибка",
+
+  "modmenu.summaryTranslation.shaderreload": "Позволяет перезагружать шейдеры с выводом ошибок в чат.",
+  "modmenu.descriptionTranslation.shaderreload": "Добавляет отладочную функцию перезагрузки шейдеров игры с помощью F3 + R, отображает возникающие во время загрузки таких шейдеров ошибки, предотвращает отключение наборов ресурсов из-за возникновения таких ошибок."
+}
