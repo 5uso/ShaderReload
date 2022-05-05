@@ -1,28 +1,33 @@
 {
   "schemaVersion": 1,
-  "id": "shader_reload",
+  "id": "shaderreload",
   "version": "${version}",
-  "name": "ShaderReload",
-  "description": "A mod that allows vanilla shader reloading with F3+R, displaying errors in chat",
+  "name": "Shader Reload",
+  "description": "Allows shader reloading, displaying errors in chat",
   "authors": [
     "Suso"
   ],
-  "contact": {},
+  "contributors": [
+    "Jerozgen"
+  ],
+  "contact": {
+    "homepage": "https://curseforge.com/minecraft/mc-mods/shader-reload",
+    "sources": "https://github.com/5uso/ShaderReload",
+    "issues": "https://github.com/5uso/ShaderReload/issues"
+  },
   "license": "MIT",
-  "icon": "assets/ShaderReload/icon.png",
+  "icon": "assets/shaderreload/icon.png",
   "environment": "client",
   "entrypoints": {
     "client": [
-      "suso.shaderreload.client.ShaderReloadClient"
-    ],
-    "main": [
       "suso.shaderreload.ShaderReload"
     ]
   },
   "mixins": [
-    "ShaderReload.mixins.json"
+    "shaderreload.mixins.json"
   ],
   "depends": {
+    "fabric-resource-loader-v0": "*",
     "fabricloader": ">=0.11.6",
     "minecraft": ">=1.18.2"
   }

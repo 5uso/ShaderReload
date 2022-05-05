@@ -3,13 +3,12 @@
   "minVersion": "0.8",
   "package": "suso.shaderreload.mixin",
   "compatibilityLevel": "JAVA_8",
-  "mixins": [
-  ],
   "client": [
-    "KeyMixin",
-    "LinkerMixin",
-    "WorldRendererMixin",
-    "GameRendererMixin"
+    "GameRendererMixin",
+    "KeyboardInvoker",
+    "KeyboardMixin",
+    "GlProgramManagerMixin",
+    "WorldRendererMixin"
   ],
   "injectors": {
     "defaultRequire": 1

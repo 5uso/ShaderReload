@@ -1,0 +1,13 @@
+{
+  "debug.reload_shaders.help": "F3 + R = Reload shaders",
+  "debug.reload_shaders.message": "Reloaded shaders",
+
+  "debug.reload_shaders.error": "Error while loading shaders:",
+  "debug.reload_shaders.error.builtin": "Error while loading built-in shaders:",
+
+  "debug.reload_shaders.unknown_error": "Unknown error while loading shaders",
+  "debug.reload_shaders.unknown_error.builtin": "Unknown error while loading built-in shaders",
+
+  "modmenu.summaryTranslation.shaderreload": "Allows shader reloading, displaying errors in chat.",
+  "modmenu.descriptionTranslation.shaderreload": "Adds a debug feature to reload vanilla shaders with F3 + R, displays errors that occur while loading vanilla shaders, prevents resource packs from being disabled due to shader errors."
+}
