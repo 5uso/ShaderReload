@@ -3,7 +3,7 @@ package suso.shaderreload.mixin;
 import net.minecraft.client.Keyboard;
 import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.util.InputUtil;
-import net.minecraft.text.TranslatableText;
+import net.minecraft.text.Text;
 import org.lwjgl.glfw.GLFW;
 import org.spongepowered.asm.mixin.Final;
 import org.spongepowered.asm.mixin.Mixin;
@@ -25,7 +25,7 @@ public abstract class KeyboardMixin {
             target = "Lnet/minecraft/client/gui/hud/ChatHud;addMessage(Lnet/minecraft/text/Text;)V",
             ordinal = 11, shift = At.Shift.AFTER))
     private void onProcessF3$addHelp(int key, CallbackInfoReturnable<Boolean> cir) {
-        client.inGameHud.getChatHud().addMessage(new TranslatableText("debug.reload_shaders.help"));
+        client.inGameHud.getChatHud().addMessage(Text.translatable("debug.reload_shaders.help"));
     }
 
     @Inject(method = "processF3", at = @At("RETURN"), cancellable = true)
