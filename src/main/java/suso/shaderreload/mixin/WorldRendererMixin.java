@@ -38,7 +38,7 @@ public abstract class WorldRendererMixin {
             target = "Lnet/minecraft/client/render/WorldRenderer$ShaderException;<init>(Ljava/lang/String;Ljava/lang/Throwable;)V"),
             cancellable = true)
     void onLoadTransparencyShader$error(CallbackInfo ci) {
-        client.options.graphicsMode = GraphicsMode.FANCY;
+        client.options.getGraphicsMode().setValue(GraphicsMode.FANCY);
         client.options.write();
         ShaderReload.onLoadShader$end();
         ci.cancel();

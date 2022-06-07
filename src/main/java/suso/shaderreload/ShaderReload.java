@@ -15,7 +15,7 @@ import net.minecraft.resource.DefaultResourcePack;
 import net.minecraft.resource.LifecycledResourceManagerImpl;
 import net.minecraft.resource.ResourceFactory;
 import net.minecraft.resource.ResourceManager;
-import net.minecraft.text.LiteralText;
+import net.minecraft.text.Text;
 import net.minecraft.util.Formatting;
 import net.minecraft.util.Identifier;
 import org.apache.logging.log4j.LogManager;
@@ -70,7 +70,7 @@ public class ShaderReload implements ClientModInitializer {
         }
         String translationKey = "debug.reload_shaders.error" + (builtin ? ".builtin" : "");
         ((KeyboardInvoker) client.keyboard).invokeDebugError(translationKey);
-        client.inGameHud.getChatHud().addMessage(new LiteralText(throwable.getMessage()).formatted(Formatting.GRAY));
+        client.inGameHud.getChatHud().addMessage(Text.literal(throwable.getMessage()).formatted(Formatting.GRAY));
     }
 
     // Try loading a core shader; if it fails, stop shader reloading or try loading a built-in core shader.
@@ -82,7 +82,8 @@ public class ShaderReload implements ClientModInitializer {
             if (reloading) throw STOP;
         }
         try {
-            return new Shader(MinecraftClient.getInstance().getResourcePackProvider().getPack(), name, format);
+            DefaultResourcePack defaultPack = MinecraftClient.getInstance().getResourcePackProvider().getPack();
+            return new Shader(defaultPack.getFactory(), name, format);
         } catch (IOException e) {
             printShaderException(e, true);
             throw e;
