@@ -32,6 +32,7 @@ public class ShaderReload implements ClientModInitializer {
     private static final StopException STOP = new StopException();
     private static boolean reloading = false;
     private static boolean stopReloading = false;
+    private static List<ResourceReloader> gameResourceReloader = null;
 
     @Override
     public void onInitializeClient() {
@@ -43,9 +44,9 @@ public class ShaderReload implements ClientModInitializer {
         reloading = true;
         stopReloading = false;
         try {
-            SimpleResourceReload.start(client.getResourceManager(),
-                    List.of(client.gameRenderer.createProgramReloader()),
-                    Util.getMainWorkerExecutor(),
+            if (gameResourceReloader == null)
+                gameResourceReloader = List.of(client.gameRenderer.createProgramReloader());
+            SimpleResourceReload.start(client.getResourceManager(), gameResourceReloader, Util.getMainWorkerExecutor(),
                     client, CompletableFuture.completedFuture(Unit.INSTANCE), false);
             client.worldRenderer.reload(client.getResourceManager());
             ((KeyboardInvoker) client.keyboard).invokeDebugLog("debug.reload_shaders.message");
