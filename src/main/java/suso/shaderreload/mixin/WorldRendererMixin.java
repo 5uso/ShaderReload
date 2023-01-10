@@ -27,8 +27,7 @@ public abstract class WorldRendererMixin {
 
     // Minecraft Development plugin definitely doesn't like @Redirects of NEW :pensive_bread:
     @SuppressWarnings({"UnresolvedMixinReference", "InvalidMemberReference", "InvalidInjectorMethodSignature", "MixinAnnotationTarget"})
-    @Redirect(method = "loadTransparencyPostProcessor", at = @At(value = "NEW",
-            target = "(Lnet/minecraft/client/texture/TextureManager;Lnet/minecraft/resource/ResourceManager;Lnet/minecraft/client/gl/Framebuffer;Lnet/minecraft/util/Identifier;)Lnet/minecraft/client/gl/PostEffectProcessor;"))
+    @Redirect(method = "loadTransparencyPostProcessor", at = @At(value = "NEW", target = "Lnet/minecraft/client/gl/PostEffectProcessor;"))
     PostEffectProcessor onLoadTransparencyPostProcessor$new(TextureManager textureManager, ResourceManager resourceManager,
                                               Framebuffer framebuffer, Identifier location) throws IOException {
         return ShaderReload.onLoadShader$new(textureManager, resourceManager, framebuffer, location);
@@ -50,8 +49,7 @@ public abstract class WorldRendererMixin {
     }
 
     @SuppressWarnings({"UnresolvedMixinReference", "InvalidMemberReference", "InvalidInjectorMethodSignature", "MixinAnnotationTarget"})
-    @Redirect(method = "loadEntityOutlinePostProcessor", at = @At(value = "NEW",
-            target = "(Lnet/minecraft/client/texture/TextureManager;Lnet/minecraft/resource/ResourceManager;Lnet/minecraft/client/gl/Framebuffer;Lnet/minecraft/util/Identifier;)Lnet/minecraft/client/gl/PostEffectProcessor;"))
+    @Redirect(method = "loadEntityOutlinePostProcessor", at = @At(value = "NEW", target = "Lnet/minecraft/client/gl/PostEffectProcessor;"))
     PostEffectProcessor onLoadEntityOutlinePostProcessor$new(TextureManager textureManager, ResourceManager resourceManager,
                                                Framebuffer framebuffer, Identifier location) throws IOException {
         return ShaderReload.onLoadShader$new(textureManager, resourceManager, framebuffer, location);
