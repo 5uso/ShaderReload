@@ -8,6 +8,7 @@ import net.minecraft.client.render.VertexFormat;
 import net.minecraft.client.texture.TextureManager;
 import net.minecraft.resource.ResourceFactory;
 import net.minecraft.resource.ResourceManager;
+import net.minecraft.resource.ResourceReloader;
 import net.minecraft.util.Identifier;
 import org.spongepowered.asm.mixin.Final;
 import org.spongepowered.asm.mixin.Mixin;
@@ -16,6 +17,7 @@ import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.Redirect;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
+import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 import suso.shaderreload.ShaderReload;
 
 import java.io.IOException;
@@ -23,20 +25,19 @@ import java.io.IOException;
 @Mixin(GameRenderer.class)
 public abstract class GameRendererMixin {
     @Shadow @Final public static int SUPER_SECRET_SETTING_COUNT;
-    @Shadow private int superSecretSettingIndex;
+    @Shadow int superSecretSettingIndex;
     @Shadow private boolean postProcessorEnabled;
 
     // Minecraft Development plugin definitely doesn't like @Redirects of NEW :pensive_bread:
     @SuppressWarnings({"UnresolvedMixinReference", "InvalidMemberReference", "InvalidInjectorMethodSignature", "MixinAnnotationTarget"})
-    @Redirect(method = "loadPrograms", at = @At(value = "NEW",
-            target = "(Lnet/minecraft/resource/ResourceFactory;Ljava/lang/String;Lnet/minecraft/client/render/VertexFormat;)Lnet/minecraft/client/gl/ShaderProgram;"))
+    @Redirect(method = "loadPrograms", at = @At(value = "NEW", target = "Lnet/minecraft/client/gl/ShaderProgram;"))
     ShaderProgram onLoadPrograms$new(ResourceFactory factory, String name, VertexFormat format) throws IOException {
         return ShaderReload.onLoadShaders$new(factory, name, format);
     }
 
     @SuppressWarnings({"UnresolvedMixinReference", "InvalidMemberReference", "InvalidInjectorMethodSignature", "MixinAnnotationTarget"})
     @Redirect(method = "loadPostProcessor(Lnet/minecraft/util/Identifier;)V", at = @At(value = "NEW",
-            target = "(Lnet/minecraft/client/texture/TextureManager;Lnet/minecraft/resource/ResourceManager;Lnet/minecraft/client/gl/Framebuffer;Lnet/minecraft/util/Identifier;)Lnet/minecraft/client/gl/PostEffectProcessor;"))
+            target = "Lnet/minecraft/client/gl/PostEffectProcessor;"))
     PostEffectProcessor onLoadPostProcessor$new(TextureManager textureManager, ResourceManager resourceManager,
                                          Framebuffer framebuffer, Identifier location) throws IOException {
         return ShaderReload.onLoadShader$new(textureManager, resourceManager, framebuffer, location);
@@ -55,5 +56,10 @@ public abstract class GameRendererMixin {
     @Inject(method = "loadPostProcessor(Lnet/minecraft/util/Identifier;)V", at = @At("TAIL"))
     void onLoadPostProcessor$success(Identifier id, CallbackInfo ci) {
         ShaderReload.onLoadShader$end();
+    }
+
+    @Inject(method = "createProgramReloader", at = @At("RETURN"))
+    void onCreateProgramReloader(CallbackInfoReturnable<ResourceReloader> cir) {
+        ShaderReload.setShaderLoader(cir.getReturnValue());
     }
 }
