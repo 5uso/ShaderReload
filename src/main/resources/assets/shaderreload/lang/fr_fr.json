@@ -1,0 +1,13 @@
+{
+  "debug.reload_shaders.help": "F3 + R = Recharger les shaders",
+  "debug.reload_shaders.message": "Shaders rechargés",
+
+  "debug.reload_shaders.error": "Erreur lors du chargement des shaders :",
+  "debug.reload_shaders.error.builtin": "Erreur lors du chargement des shaders intégrés :",
+
+  "debug.reload_shaders.unknown_error": "Erreur inconnue lors du chargement des shaders",
+  "debug.reload_shaders.unknown_error.builtin": "Erreur inconnue lors du chargement des shaders intégrés",
+
+  "modmenu.summaryTranslation.shaderreload": "Permet le rechargement du shader, affiche les erreurs dans le chat.",
+  "modmenu.descriptionTranslation.shaderreload": "Ajoute une fonction de débogage pour recharger les shaders vanilla avec F3 + R, affiche les erreurs qui se produisent lors du chargement des shaders vanilla, empêche la désactivation des packs de ressources en raison d'erreurs de shader."
+}
