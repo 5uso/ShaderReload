@@ -5,10 +5,12 @@
   "name": "Shader Reload",
   "description": "Allows shader reloading, displaying errors in chat",
   "authors": [
-    "Suso"
+    "Suso",
+    "Jerozgen"
   ],
   "contributors": [
-    "Jerozgen"
+    "Uraxys",
+    "Calvineries"
   ],
   "contact": {
     "homepage": "https://curseforge.com/minecraft/mc-mods/shader-reload",
