@@ -29,13 +29,13 @@ public abstract class GameRendererMixin {
     @Shadow private boolean postProcessorEnabled;
 
     // Minecraft Development plugin definitely doesn't like @Redirects of NEW :pensive_bread:
-    @SuppressWarnings({"UnresolvedMixinReference", "InvalidMemberReference", "InvalidInjectorMethodSignature", "MixinAnnotationTarget"})
+    @SuppressWarnings({"UnresolvedMixinReference", "InvalidInjectorMethodSignature", "MixinAnnotationTarget"})
     @Redirect(method = "loadPrograms", at = @At(value = "NEW", target = "Lnet/minecraft/client/gl/ShaderProgram;"))
     ShaderProgram onLoadPrograms$new(ResourceFactory factory, String name, VertexFormat format) throws IOException {
         return ShaderReload.onLoadShaders$new(factory, name, format);
     }
 
-    @SuppressWarnings({"UnresolvedMixinReference", "InvalidMemberReference", "InvalidInjectorMethodSignature", "MixinAnnotationTarget"})
+    @SuppressWarnings({"UnresolvedMixinReference", "InvalidInjectorMethodSignature", "MixinAnnotationTarget"})
     @Redirect(method = "loadPostProcessor(Lnet/minecraft/util/Identifier;)V", at = @At(value = "NEW",
             target = "Lnet/minecraft/client/gl/PostEffectProcessor;"))
     PostEffectProcessor onLoadPostProcessor$new(TextureManager textureManager, ResourceManager resourceManager,
