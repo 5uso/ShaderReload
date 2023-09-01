@@ -14,12 +14,9 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 import suso.shaderreload.ShaderReload;
 
-import java.util.Objects;
-
 @Mixin(Keyboard.class)
 public abstract class KeyboardMixin {
     @Shadow @Final private MinecraftClient client;
-    @Shadow private boolean switchF3State;
 
     @Inject(method = "processF3", at = @At(value = "INVOKE",
             target = "Lnet/minecraft/client/gui/hud/ChatHud;addMessage(Lnet/minecraft/text/Text;)V",
@@ -42,9 +39,6 @@ public abstract class KeyboardMixin {
     void onOnKey(long window, int key, int scancode, int action, int modifiers, CallbackInfo ci) {
         if (!InputUtil.isKeyPressed(window, GLFW.GLFW_KEY_F3) || key != ShaderReload.GLFW_KEY) return;
         if (action != 0) {
-            if (Objects.requireNonNull(client.currentScreen).passEvents) {
-                switchF3State = true;
-            }
             ShaderReload.reloadShaders();
         }
         ci.cancel();
