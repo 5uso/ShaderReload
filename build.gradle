@@ -30,13 +30,13 @@ tasks.withType(JavaCompile).configureEach {
 //Generate source jar
 java {
     archivesBaseName = project.archives_base_name
-    sourceCompatibility = JavaVersion.VERSION_17
-    targetCompatibility = JavaVersion.VERSION_17
+    sourceCompatibility = JavaVersion.VERSION_21
+    targetCompatibility = JavaVersion.VERSION_21
 
     withSourcesJar()
 }
 
-//You got a loicense for that m8
+//You got a license for that m8
 jar {
     from "LICENSE"
 }
