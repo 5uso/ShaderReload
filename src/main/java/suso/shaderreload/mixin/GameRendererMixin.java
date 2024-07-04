@@ -24,8 +24,6 @@ import java.io.IOException;
 
 @Mixin(GameRenderer.class)
 public abstract class GameRendererMixin {
-    @Shadow @Final public static int SUPER_SECRET_SETTING_COUNT;
-    @Shadow int superSecretSettingIndex;
     @Shadow private boolean postProcessorEnabled;
 
     // Minecraft Development plugin definitely doesn't like @Redirects of NEW :pensive_bread:
@@ -38,16 +36,15 @@ public abstract class GameRendererMixin {
     @SuppressWarnings({"UnresolvedMixinReference", "InvalidInjectorMethodSignature", "MixinAnnotationTarget"})
     @Redirect(method = "loadPostProcessor(Lnet/minecraft/util/Identifier;)V", at = @At(value = "NEW",
             target = "Lnet/minecraft/client/gl/PostEffectProcessor;"))
-    PostEffectProcessor onLoadPostProcessor$new(TextureManager textureManager, ResourceManager resourceManager,
+    PostEffectProcessor onLoadPostProcessor$new(TextureManager textureManager, ResourceFactory resourceFactory,
                                          Framebuffer framebuffer, Identifier location) throws IOException {
-        return ShaderReload.onLoadShader$new(textureManager, resourceManager, framebuffer, location);
+        return ShaderReload.onLoadShader$new(textureManager, resourceFactory, framebuffer, location);
     }
 
     @Inject(method = "loadPostProcessor(Lnet/minecraft/util/Identifier;)V", at = @At(value = "INVOKE",
             target = "Lorg/slf4j/Logger;warn(Ljava/lang/String;Ljava/lang/Object;Ljava/lang/Object;)V",
             remap = false), cancellable = true)
     void onLoadPostProcessor$error(Identifier id, CallbackInfo ci) {
-        superSecretSettingIndex = SUPER_SECRET_SETTING_COUNT;
         postProcessorEnabled = false;
         ShaderReload.onLoadShader$end();
         ci.cancel();
