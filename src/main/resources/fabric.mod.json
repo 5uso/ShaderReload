@@ -11,7 +11,8 @@
   "contributors": [
     "Uraxys",
     "Calvineries",
-    "codingcat2468"
+    "codingcat2468",
+    "Neylz"
   ],
   "contact": {
     "homepage": "https://curseforge.com/minecraft/mc-mods/shader-reload",
@@ -31,7 +32,7 @@
   ],
   "depends": {
     "fabric-resource-loader-v0": "*",
-    "fabricloader": ">=0.15.10",
-    "minecraft": ">=1.20.5"
+    "fabricloader": ">=0.11.6",
+    "minecraft": ">=1.21"
   }
 }
