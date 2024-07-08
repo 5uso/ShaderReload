@@ -1,13 +1,9 @@
 plugins {
-    id 'fabric-loom' version '1.0.+'
+    id 'fabric-loom' version '1.6.+'
     id 'io.github.juuxel.loom-quiltflower' version '1.8.0'
     id 'maven-publish'
 }
 
-sourceCompatibility = JavaVersion.VERSION_17
-targetCompatibility = JavaVersion.VERSION_17
-
-archivesBaseName = project.archives_base_name
 version = project.mod_version
 group = project.maven_group
 
@@ -27,12 +23,16 @@ processResources {
     }
 }
 
-tasks.withType(JavaCompile) {
+tasks.withType(JavaCompile).configureEach {
     options.encoding = "UTF-8"
 }
 
 //Generate source jar
 java {
+    archivesBaseName = project.archives_base_name
+    sourceCompatibility = JavaVersion.VERSION_21
+    targetCompatibility = JavaVersion.VERSION_21
+
     withSourcesJar()
 }
 

@@ -6,7 +6,7 @@ import net.minecraft.client.gl.PostEffectProcessor;
 import net.minecraft.client.option.GraphicsMode;
 import net.minecraft.client.render.WorldRenderer;
 import net.minecraft.client.texture.TextureManager;
-import net.minecraft.resource.ResourceManager;
+import net.minecraft.resource.ResourceFactory;
 import net.minecraft.util.Identifier;
 import org.spongepowered.asm.mixin.Final;
 import org.spongepowered.asm.mixin.Mixin;
@@ -25,12 +25,10 @@ public abstract class WorldRendererMixin {
     @Shadow private PostEffectProcessor entityOutlinePostProcessor;
     @Shadow private Framebuffer entityOutlinesFramebuffer;
 
-    // Minecraft Development plugin definitely doesn't like @Redirects of NEW :pensive_bread:
-    @SuppressWarnings({"UnresolvedMixinReference", "InvalidInjectorMethodSignature", "MixinAnnotationTarget"})
     @Redirect(method = "loadTransparencyPostProcessor", at = @At(value = "NEW", target = "Lnet/minecraft/client/gl/PostEffectProcessor;"))
-    PostEffectProcessor onLoadTransparencyPostProcessor$new(TextureManager textureManager, ResourceManager resourceManager,
+    PostEffectProcessor onLoadTransparencyPostProcessor$new(TextureManager textureManager, ResourceFactory resourceFactory,
                                               Framebuffer framebuffer, Identifier location) throws IOException {
-        return ShaderReload.onLoadShader$new(textureManager, resourceManager, framebuffer, location);
+        return ShaderReload.onLoadShader$new(textureManager, resourceFactory, framebuffer, location);
     }
 
     @Inject(method = "loadTransparencyPostProcessor", at = @At(value = "INVOKE",
@@ -48,11 +46,10 @@ public abstract class WorldRendererMixin {
         ShaderReload.onLoadShader$end();
     }
 
-    @SuppressWarnings({"UnresolvedMixinReference", "InvalidInjectorMethodSignature", "MixinAnnotationTarget"})
     @Redirect(method = "loadEntityOutlinePostProcessor", at = @At(value = "NEW", target = "Lnet/minecraft/client/gl/PostEffectProcessor;"))
-    PostEffectProcessor onLoadEntityOutlinePostProcessor$new(TextureManager textureManager, ResourceManager resourceManager,
+    PostEffectProcessor onLoadEntityOutlinePostProcessor$new(TextureManager textureManager, ResourceFactory resourceFactory,
                                                Framebuffer framebuffer, Identifier location) throws IOException {
-        return ShaderReload.onLoadShader$new(textureManager, resourceManager, framebuffer, location);
+        return ShaderReload.onLoadShader$new(textureManager, resourceFactory, framebuffer, location);
     }
 
     @Inject(method = "loadEntityOutlinePostProcessor", at = @At(value = "INVOKE",

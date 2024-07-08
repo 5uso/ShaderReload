@@ -102,18 +102,18 @@ public class ShaderReload implements ClientModInitializer {
 
     // Try loading a shader effect; if it fails, request stopping and try loading a built-in shader effect.
     @SuppressWarnings("resource")
-    public static PostEffectProcessor onLoadShader$new(TextureManager textureManager, ResourceManager resourceManager,
+    public static PostEffectProcessor onLoadShader$new(TextureManager textureManager, ResourceFactory resourceFactory,
                                                        Framebuffer framebuffer, Identifier location) throws IOException {
         try {
-            return new PostEffectProcessor(textureManager, resourceManager, framebuffer, location);
+            return new PostEffectProcessor(textureManager, resourceFactory, framebuffer, location);
         } catch (IOException | JsonSyntaxException e) {
             printShaderException(e, false);
             stopReloading = true;
         }
         try {
             var defaultPack = MinecraftClient.getInstance().getDefaultResourcePack();
-            resourceManager = new LifecycledResourceManagerImpl(CLIENT_RESOURCES, List.of(defaultPack));
-            return new PostEffectProcessor(textureManager, resourceManager, framebuffer, location);
+            resourceFactory = new LifecycledResourceManagerImpl(CLIENT_RESOURCES, List.of(defaultPack));
+            return new PostEffectProcessor(textureManager, resourceFactory, framebuffer, location);
         } catch (IOException | JsonSyntaxException e) {
             printShaderException(e, true);
             throw e;
