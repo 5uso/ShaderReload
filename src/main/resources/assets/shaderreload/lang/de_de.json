@@ -1,0 +1,13 @@
+{
+  "debug.reload_shaders.help": "F3 + R = Shader neu laden",
+  "debug.reload_shaders.message": "Shader erfolgreich neu geladen",
+
+  "debug.reload_shaders.error": "Fehler beim neu laden der Shader:",
+  "debug.reload_shaders.error.builtin": "Fehler beim neu laden der integrierten Shader:",
+
+  "debug.reload_shaders.unknown_error": "Unbekannter Fehler beim neu laden der Shader",
+  "debug.reload_shaders.unknown_error.builtin": "Unbekannter Fehler beim neu laden der integrierten Shader",
+
+  "modmenu.summaryTranslation.shaderreload": "Erlaubt das neu laden von Shadern und zeigt Fehler im Chat an.",
+  "modmenu.descriptionTranslation.shaderreload": "Fügt ein Debugging-Feature hinzu, dass das neu laden von Vanilla-Shadern mit F3 + R erlaubt, zeigt dabei auftretende Fehler im Chat an und verhindert, dass Ressourcenpakete wegen Shader-Fehlern deaktiviert werden."
+}

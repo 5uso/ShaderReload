@@ -26,8 +26,6 @@ public abstract class WorldRendererMixin {
     @Shadow private PostEffectProcessor entityOutlinePostProcessor;
     @Shadow private Framebuffer entityOutlinesFramebuffer;
 
-    // Minecraft Development plugin definitely doesn't like @Redirects of NEW :pensive_bread:
-    @SuppressWarnings({"UnresolvedMixinReference", "InvalidInjectorMethodSignature", "MixinAnnotationTarget"})
     @Redirect(method = "loadTransparencyPostProcessor", at = @At(value = "NEW", target = "Lnet/minecraft/client/gl/PostEffectProcessor;"))
     PostEffectProcessor onLoadTransparencyPostProcessor$new(TextureManager textureManager, ResourceFactory resourceFactory,
                                               Framebuffer framebuffer, Identifier location) throws IOException {
@@ -49,7 +47,6 @@ public abstract class WorldRendererMixin {
         ShaderReload.onLoadShader$end();
     }
 
-    @SuppressWarnings({"UnresolvedMixinReference", "InvalidInjectorMethodSignature", "MixinAnnotationTarget"})
     @Redirect(method = "loadEntityOutlinePostProcessor", at = @At(value = "NEW", target = "Lnet/minecraft/client/gl/PostEffectProcessor;"))
     PostEffectProcessor onLoadEntityOutlinePostProcessor$new(TextureManager textureManager, ResourceFactory resourceFactory,
                                                Framebuffer framebuffer, Identifier location) throws IOException {

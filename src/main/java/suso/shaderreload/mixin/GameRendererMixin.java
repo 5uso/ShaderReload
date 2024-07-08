@@ -7,10 +7,8 @@ import net.minecraft.client.render.GameRenderer;
 import net.minecraft.client.render.VertexFormat;
 import net.minecraft.client.texture.TextureManager;
 import net.minecraft.resource.ResourceFactory;
-import net.minecraft.resource.ResourceManager;
 import net.minecraft.resource.ResourceReloader;
 import net.minecraft.util.Identifier;
-import org.spongepowered.asm.mixin.Final;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Shadow;
 import org.spongepowered.asm.mixin.injection.At;
@@ -26,14 +24,11 @@ import java.io.IOException;
 public abstract class GameRendererMixin {
     @Shadow private boolean postProcessorEnabled;
 
-    // Minecraft Development plugin definitely doesn't like @Redirects of NEW :pensive_bread:
-    @SuppressWarnings({"UnresolvedMixinReference", "InvalidInjectorMethodSignature", "MixinAnnotationTarget"})
     @Redirect(method = "loadPrograms", at = @At(value = "NEW", target = "Lnet/minecraft/client/gl/ShaderProgram;"))
     ShaderProgram onLoadPrograms$new(ResourceFactory factory, String name, VertexFormat format) throws IOException {
         return ShaderReload.onLoadShaders$new(factory, name, format);
     }
 
-    @SuppressWarnings({"UnresolvedMixinReference", "InvalidInjectorMethodSignature", "MixinAnnotationTarget"})
     @Redirect(method = "loadPostProcessor(Lnet/minecraft/util/Identifier;)V", at = @At(value = "NEW",
             target = "Lnet/minecraft/client/gl/PostEffectProcessor;"))
     PostEffectProcessor onLoadPostProcessor$new(TextureManager textureManager, ResourceFactory resourceFactory,
