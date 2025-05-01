@@ -1,5 +1,5 @@
 plugins {
-    id 'fabric-loom' version '1.7.+'
+    id 'fabric-loom' version '1.10.+'
     id 'io.github.juuxel.loom-quiltflower' version '1.8.0'
     id 'maven-publish'
 }
@@ -13,6 +13,10 @@ dependencies {
     mappings "net.fabricmc:yarn:${project.yarn_mappings}:v2"
     modImplementation "net.fabricmc:fabric-loader:${project.loader_version}"
     modImplementation fabricApi.module("fabric-resource-loader-v0", project.fabric_version)
+}
+
+loom {
+    accessWidenerPath = file("src/main/resources/shaderreload.accesswidener")
 }
 
 processResources {

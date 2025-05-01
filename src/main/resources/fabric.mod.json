@@ -21,6 +21,7 @@
   },
   "license": "MIT",
   "icon": "assets/shaderreload/icon.png",
+  "accesswidener": "shaderreload.accesswidener",
   "environment": "client",
   "entrypoints": {
     "client": [
