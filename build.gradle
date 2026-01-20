@@ -1,6 +1,5 @@
 plugins {
-    id 'fabric-loom' version '1.7.+'
-    id 'io.github.juuxel.loom-quiltflower' version '1.8.0'
+    id 'net.fabricmc.fabric-loom-remap' version "${loom_version}"
     id 'maven-publish'
 }
 
@@ -8,11 +7,22 @@ version = project.mod_version
 group = project.maven_group
 
 dependencies {
-    //Versions in gradle.properties
+    // To change the versions see the gradle.properties file
     minecraft "com.mojang:minecraft:${project.minecraft_version}"
     mappings "net.fabricmc:yarn:${project.yarn_mappings}:v2"
     modImplementation "net.fabricmc:fabric-loader:${project.loader_version}"
+
+    // Fabric API. This is technically optional, but you probably want it anyway.
+    modImplementation "net.fabricmc.fabric-api:fabric-api:${project.fabric_version}"
     modImplementation fabricApi.module("fabric-resource-loader-v0", project.fabric_version)
+}
+
+loom {
+    mods {
+        "shader-reload" {
+            sourceSet sourceSets.main
+        }
+    }
 }
 
 processResources {
@@ -27,9 +37,12 @@ tasks.withType(JavaCompile).configureEach {
     options.encoding = "UTF-8"
 }
 
+tasks.withType(JavaCompile).configureEach {
+    it.options.release = 21
+}
+
 //Generate source jar
 java {
-    archivesBaseName = project.archives_base_name
     sourceCompatibility = JavaVersion.VERSION_21
     targetCompatibility = JavaVersion.VERSION_21
 
